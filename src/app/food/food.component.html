@@ -1,0 +1,12 @@
+<div *ngFor="let food of foods" class="container">
+  <div class="row">
+    <div class="col col-xs-12">
+      <h2>{{food.name}}</h2>
+      <img *ngIf="food.photo && food.photo.length > 0" src="{{food.photo}}" style="width: 300px; height: 150px"/>
+      <p>Prix : {{food.price}}€</p>
+      <p>Ce produit est un {{food.category}}</p>
+      <button class="btn btn-success">Ajouter au panier</button>
+      <button class="btn btn-danger">Retirer du panier</button>
+    </div>
+  </div>
+</div>
