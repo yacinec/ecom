@@ -1,29 +1,30 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { FoodService } from '../services/food.service';
+import { Food } from '../models/food.mock';
 
 @Component({
   selector: 'app-food',
   templateUrl: './food.component.html',
   styleUrls: ['./food.component.css']
 })
-export class FoodComponent implements OnInit, OnDestroy {
+export class FoodComponent implements OnInit {
 
-  foods: any[];
-  foodSubcription: Subscription;
+  foods: Food[];
+  loading: boolean = false;
 
   constructor(private foodService: FoodService) { }
 
   ngOnInit() {
-    this.foodSubcription = this.foodService.articleSubject.subscribe(
-      (foods: any[]) => {
-        this.foods = foods;
-      }
-    );
-    this.foodService.emitArticleSubject();
+
+    this.loading = true;
+    this.getFoods();
   }
 
-  ngOnDestroy() {
-    this.foodSubcription.unsubscribe();
+  getFoods(): void {
+    this.foodService.getFoods()
+      .subscribe(foods => this.foods = foods);
+    
+      this.loading = false;
   }
+
 }

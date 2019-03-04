@@ -1,3 +1,7 @@
+<div *ngIf="loading" class="spinner-border text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+
 <div *ngFor="let food of foods" class="container">
   <div class="row">
     <div class="col col-xs-12">
@@ -7,6 +11,7 @@
       <p>Ce produit est un {{food.category}}</p>
       <button class="btn btn-success">Ajouter au panier</button>
       <button class="btn btn-danger">Retirer du panier</button>
+      <a routerLink="/articles/{{food.id}}">Détails</a>
     </div>
   </div>
 </div>
